@@ -1,0 +1,1160 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_GRAFANADASHBOARDV0.1",
+      "label": "GrafanaDashboardv0.1",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "mysql",
+      "pluginName": "MySQL"
+    }
+  ],
+  "__elements": {},
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "10.1.5"
+    },
+    {
+      "type": "datasource",
+      "id": "mysql",
+      "name": "MySQL",
+      "version": "1.0.0"
+    },
+    {
+      "type": "panel",
+      "id": "table",
+      "name": "Table",
+      "version": ""
+    },
+    {
+      "type": "panel",
+      "id": "timeseries",
+      "name": "Time series",
+      "version": ""
+    }
+  ],
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_GRAFANADASHBOARDV0.1}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#bec74d",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "json-view"
+            },
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Source Port"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 311
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#579574",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "see details",
+                    "url": "http://localhost:3000/d/c1281a4f-3469-49e9-99be-9268db5526d4/top-ports-wrt-traffic-details?orgId=1&from=now-7d&to=now&var-vendor=Nokia&var-area=AUH&var-top=5&var-traffic=Total&var-kpi=Average%20Utilization%28%25%29&var-source=${__data.fields[\"Source Port\"]}&var-target=${__data.fields[\"Target Port\"]}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port Speed (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-RdYlGr"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "MBs"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port Mode"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port/LAG"
+            },
+            "properties": [
+              {
+                "id": "custom.align",
+                "value": "center"
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Target Port"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#747d99",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 136,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.1.5",
+      "targets": [
+        {
+          "dataset": "demodb",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_GRAFANADASHBOARDV0.1}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": " SELECT    \r\n    pd.`Source Desc`,\r\n    pd.`Destination Desc`,\r\n    pd.`Port Speed (Mbps)`,\r\n    pd.`Port Mode`,\r\n    pd.`$kpi`,\r\n    ni.`equipmentType`\r\nFROM \r\n    grafana_dashboards.port_data AS pd\r\nJOIN \r\n    ne_inventory AS ni ON pd.`ne name` = ni.`siteName`\r\nWHERE \r\n    pd.Region IN ($area)\r\n    AND pd.Direction IN ($traffic)\r\n    AND pd.`Report Time` >= $__timeFrom()\r\n    AND pd.`Report Time` < $__timeTo()\r\n    AND pd.vendor IN ($vendor) \r\n    AND ni.equipmentType IN ($networkLayer)\r\nGROUP BY \r\n    pd.Description\r\nORDER BY \r\n    pd.`$kpi` DESC \r\nLIMIT \r\n    $top;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "$kpi",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "equipmentType": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Destination Desc": "Target Port",
+              "Source Desc": "Source Port"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 23,
+      "panels": [],
+      "title": " $kpi TrendLine",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_GRAFANADASHBOARDV0.1}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "#24908d",
+            "mode": "shades"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "series",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "smooth",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 3,
+            "pointSize": 12,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4.8,
+        "x": 0,
+        "y": 10
+      },
+      "id": 16,
+      "maxPerRow": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "asc"
+        }
+      },
+      "repeat": "target_ports",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "dataset": "demodb",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_GRAFANADASHBOARDV0.1}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    pd.`Report Time` AS time,\r\n    pd.`$kpi`,\r\n    CONCAT(pd.`NE Name`, \"_\", pd.`Port/LAG`) AS Port\r\nFROM \r\n    grafana_dashboards.port_data AS pd\r\nJOIN \r\n    ne_inventory AS ni ON pd.`ne name` = ni.`siteName`\r\nWHERE \r\n    CONCAT(pd.`NE Name`, \"_\", pd.`Port/LAG`) IN ($target_ports) \r\n    AND pd.Region IN ($area) \r\n    AND pd.Direction IN ($traffic) \r\n    AND pd.`Report Time` >= $__timeFrom() \r\n    AND pd.`Report Time` < $__timeTo() \r\n    AND pd.vendor IN ($vendor)\r\n    AND ni.equipmentType IN ($networkLayer)\r\nORDER BY \r\n    pd.`Report Time`;\r\n",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "title": "$target_ports",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 51,
+      "panels": [],
+      "title": "Extended KPI details (table format)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "mysql",
+        "uid": "${DS_GRAFANADASHBOARDV0.1}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "continuous-RdYlGr"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "json-view"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Max (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Min (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "95th PCTL (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg Utilization(%)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge",
+                  "valueDisplayMode": "color"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Errors"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "lcd",
+                  "type": "gauge"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-RdYlGr"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "NE Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#3d3d3f",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port Speed (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "gauge",
+                  "valueDisplayMode": "text"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "continuous-YlBl"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port Mode"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Description"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "gradient",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#252424",
+                  "mode": "shades"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Port/LAG"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "auto"
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#e6c835",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Min (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Max (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "95th PCTL (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Avg Utilization(%)"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Errors"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 61,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Errors"
+          }
+        ]
+      },
+      "pluginVersion": "10.1.5",
+      "targets": [
+        {
+          "dataset": "demodb",
+          "datasource": {
+            "type": "mysql",
+            "uid": "${DS_GRAFANADASHBOARDV0.1}"
+          },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT \r\n    DISTINCT \r\n    CASE\r\n        WHEN pd.`Description` LIKE '%=INTERNODAL 1' THEN SUBSTRING(pd.`Description`, 1, LENGTH(pd.`Description`) - LENGTH('=INTERNODAL 1'))\r\n        WHEN pd.`Description` LIKE '%=INTERNODAL' THEN SUBSTRING(pd.`Description`, 1, LENGTH(pd.`Description`) - LENGTH('=INTERNODAL'))\r\n        WHEN pd.`Description` LIKE '%=INTERNODAL via OTN' THEN SUBSTRING(pd.`Description`, 1, LENGTH(pd.`Description`) - LENGTH('=INTERNODAL via OTN'))\r\n        WHEN pd.`Description` LIKE '%=INTERNODAL via OSN' THEN SUBSTRING(pd.`Description`, 1, LENGTH(pd.`Description`) - LENGTH('=INTERNODAL via OSN'))\r\n        WHEN pd.`Description` LIKE '%=UPLINK' THEN SUBSTRING(pd.`Description`, 1, LENGTH(pd.`Description`) - LENGTH('=UPLINK'))        \r\n        ELSE pd.`Description`\r\n    END AS `Description`,\r\n    pd.`NE Name`,\r\n    pd.`Port/LAG`,\r\n    pd.`Port Speed (Mbps)` AS `Port Speed (Mbps)`,\r\n    pd.`Port Mode`,\r\n    pd.`Average (Mbps)` AS `Avg (Mbps)`,\r\n    pd.`Minimum (Mbps)` AS `Min (Mbps)`,\r\n    pd.`Maximum (Mbps)` AS `Max (Mbps)`,\r\n    pd.`95 PCTL (Mbps)` AS `95th PCTL (Mbps)`,\r\n    pd.`Average Utilization(%)` AS `Avg Utilization(%)`,\r\n    pd.`Errors` AS `Errors`\r\nFROM \r\n    grafana_dashboards.port_data AS pd\r\nJOIN \r\n    ne_inventory AS ni ON pd.`NE Name` = ni.`siteName`\r\nWHERE \r\n    pd.Region IN ($area) \r\n    AND pd.Direction IN ($traffic) \r\n    AND pd.`Report Time` >= $__timeFrom() \r\n    AND pd.`Report Time` < $__timeTo() \r\n    AND pd.vendor IN ($vendor)\r\n    AND ni.equipmentType IN ($networkLayer)\r\nGROUP BY \r\n    `Description`, pd.`NE Name`, pd.`Port/LAG`\r\nORDER BY \r\n    `$kpi` DESC \r\nLIMIT \r\n    $top;",
+          "refId": "A",
+          "sql": {
+            "columns": [
+              {
+                "parameters": [],
+                "type": "function"
+              }
+            ],
+            "groupBy": [
+              {
+                "property": {
+                  "type": "string"
+                },
+                "type": "groupBy"
+              }
+            ],
+            "limit": 50
+          }
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "#Errors": false,
+              "95 PCTL (Mbps)": false,
+              "Average (Mbps)": false,
+              "Average Utilization(%)": false,
+              "Avg (Mbps)": false,
+              "Description": true,
+              "Max (Mbps)": false,
+              "Maximum (Mbps)": false,
+              "Min (Mbps)": false,
+              "Minimum (Mbps)": false
+            },
+            "indexByName": {},
+            "renameByName": {
+              "#Errors": "Errors",
+              "95 PCTL (Mbps)": "",
+              "Average (Mbps)": "Avg (Mbps)",
+              "Average Utilization(%)": "Avg.Utilization (%)",
+              "Avg (Mbps)": "",
+              "Count": "Port/Lag",
+              "Description": "",
+              "Maximum (Mbps)": "Max (Mbps)",
+              "Minimum (Mbps)": "Min (Mbps)",
+              "Port Mode": "",
+              "Port Speed (Mbps)": "",
+              "count": "Port/Lag"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": [
+            "Nokia"
+          ],
+          "value": [
+            "Nokia"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Vendor",
+        "multi": true,
+        "name": "vendor",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": true,
+            "text": "Nokia",
+            "value": "Nokia"
+          },
+          {
+            "selected": false,
+            "text": "Cisco",
+            "value": "Cisco"
+          }
+        ],
+        "query": "Nokia, Cisco",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": [
+            "AUH"
+          ],
+          "value": [
+            "AUH"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Select Region",
+        "multi": true,
+        "name": "area",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "DXB",
+            "value": "DXB"
+          },
+          {
+            "selected": true,
+            "text": "AUH",
+            "value": "AUH"
+          },
+          {
+            "selected": false,
+            "text": "NE",
+            "value": "NE"
+          }
+        ],
+        "query": "DXB,AUH,NE",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Network Layer",
+        "multi": true,
+        "name": "networkLayer",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "AGG",
+            "value": "AGG"
+          },
+          {
+            "selected": false,
+            "text": "PREAGG",
+            "value": "PREAGG"
+          },
+          {
+            "selected": false,
+            "text": "CSG",
+            "value": "CSG"
+          }
+        ],
+        "query": "AGG,PREAGG,CSG",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "5",
+          "value": "5"
+        },
+        "hide": 0,
+        "label": "Top",
+        "name": "top",
+        "options": [
+          {
+            "selected": true,
+            "text": "5",
+            "value": "5"
+          },
+          {
+            "selected": false,
+            "text": "10",
+            "value": "10"
+          },
+          {
+            "selected": false,
+            "text": "15",
+            "value": "15"
+          },
+          {
+            "selected": false,
+            "text": "20",
+            "value": "20"
+          }
+        ],
+        "query": "5,10,15,20",
+        "queryValue": "",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": [
+            "Total"
+          ],
+          "value": [
+            "Total"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Traffic Type",
+        "multi": true,
+        "name": "traffic",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": true,
+            "text": "Total",
+            "value": "Total"
+          },
+          {
+            "selected": false,
+            "text": "Ingress",
+            "value": "Ingress"
+          },
+          {
+            "selected": false,
+            "text": "Egress",
+            "value": "Egress"
+          }
+        ],
+        "query": "Total,Ingress,Egress",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "Average (Mbps)",
+          "value": "Average (Mbps)"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "KPI",
+        "multi": false,
+        "name": "kpi",
+        "options": [
+          {
+            "selected": false,
+            "text": "Minimum (Mbps)",
+            "value": "Minimum (Mbps)"
+          },
+          {
+            "selected": true,
+            "text": "Average (Mbps)",
+            "value": "Average (Mbps)"
+          },
+          {
+            "selected": false,
+            "text": "Maximum (Mbps)",
+            "value": "Maximum (Mbps)"
+          },
+          {
+            "selected": false,
+            "text": "95 PCTL (Mbps)",
+            "value": "95 PCTL (Mbps)"
+          },
+          {
+            "selected": false,
+            "text": "Average Utilization(%)",
+            "value": "Average Utilization(%)"
+          },
+          {
+            "selected": false,
+            "text": "Errors",
+            "value": "Errors"
+          }
+        ],
+        "query": "Minimum (Mbps),Average (Mbps),Maximum (Mbps),95 PCTL (Mbps),Average Utilization(%),Errors",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "mysql",
+          "uid": "${DS_GRAFANADASHBOARDV0.1}"
+        },
+        "definition": "SELECT `Port/LAG`  FROM demodb.port_data\nWHERE Region IN ($area) AND Direction IN ($traffic) AND `Report Time` >= NOW() - INTERVAL $timeRange DAY\nORDER BY `$kpi` DESC\nLIMIT $top;\n",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Ports",
+        "multi": false,
+        "name": "port",
+        "options": [],
+        "query": "SELECT `Port/LAG`  FROM demodb.port_data\nWHERE Region IN ($area) AND Direction IN ($traffic) AND `Report Time` >= NOW() - INTERVAL $timeRange DAY\nORDER BY `$kpi` DESC\nLIMIT $top;\n",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {},
+        "datasource": {
+          "type": "mysql",
+          "uid": "${DS_GRAFANADASHBOARDV0.1}"
+        },
+        "definition": "SELECT \n    DISTINCT CONCAT(pd.`NE Name`, \"_\", pd.`Port/LAG`) AS Port\nFROM \n    grafana_dashboards.port_data AS pd\nJOIN \n    ne_inventory AS ni ON pd.`NE Name` = ni.`siteName`\nWHERE \n    pd.Region IN ($area) \n    AND pd.Direction = $traffic \n    AND pd.`Report Time` >= $__timeFrom() \n    AND pd.`Report Time` < $__timeTo() \nORDER BY \n    `$kpi` DESC \nLIMIT \n    $top;\n",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Target Ports",
+        "multi": true,
+        "name": "target_ports",
+        "options": [],
+        "query": "SELECT \n    DISTINCT CONCAT(pd.`NE Name`, \"_\", pd.`Port/LAG`) AS Port\nFROM \n    grafana_dashboards.port_data AS pd\nJOIN \n    ne_inventory AS ni ON pd.`NE Name` = ni.`siteName`\nWHERE \n    pd.Region IN ($area) \n    AND pd.Direction = $traffic \n    AND pd.`Report Time` >= $__timeFrom() \n    AND pd.`Report Time` < $__timeTo() \nORDER BY \n    `$kpi` DESC \nLIMIT \n    $top;\n",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Top Ports wrt Traffic v2 Copy",
+  "uid": "c7c14515-342d-45f5-849d-9cb64b296fca",
+  "version": 53,
+  "weekStart": ""
+}

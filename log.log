@@ -1,0 +1,24 @@
+INFO:14-May-24 10:23:16 - Calling function: main
+INFO:14-May-24 10:23:16 - Calling function: read_fields_from_ini
+INFO:14-May-24 10:23:16 - Calling function: establish_connection
+INFO:14-May-24 10:23:16 - Connected to DB.
+INFO:14-May-24 10:23:16 - Calling function: create_table
+INFO:14-May-24 10:23:16 - Database table 'port_data' has been created
+INFO:14-May-24 10:23:16 - Calling function: load_port_data
+INFO:14-May-24 10:23:33 - Final Input file: Input_Data\Port_Throughput_9.xls
+INFO:14-May-24 13:11:19 - Calling function: main
+INFO:14-May-24 13:11:19 - Calling function: read_fields_from_ini
+INFO:14-May-24 13:11:19 - Calling function: establish_connection
+INFO:14-May-24 13:11:19 - Connected to DB.
+INFO:14-May-24 13:11:19 - Calling function: create_table
+INFO:14-May-24 13:11:19 - Database table 'port_data' has been created
+INFO:14-May-24 13:11:19 - Calling function: load_port_data
+INFO:14-May-24 13:11:34 - Final Input file: Input_Data\Port_Throughput_9.xls
+INFO:22-May-24 13:43:09 - Calling function: main
+INFO:22-May-24 13:43:09 - Calling function: read_fields_from_ini
+INFO:22-May-24 13:43:09 - Calling function: establish_connection
+INFO:22-May-24 13:43:09 - Connected to DB.
+INFO:22-May-24 13:43:09 - Calling function: create_table
+INFO:22-May-24 13:43:09 - Database table 'port_data' has been created
+INFO:22-May-24 13:43:09 - Calling function: load_port_data
+INFO:22-May-24 13:43:25 - Final Input file: Input_Data\Port_Throughput_9.xls
